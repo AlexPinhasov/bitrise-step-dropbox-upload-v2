@@ -64,24 +64,37 @@ toolkit:
 
 
 inputs:
-  - example_step_input: Default Value - you can leave this empty if you want to
+  - dropbox_secret:
     opts:
-      title: "Example Step Input"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
-      is_expand: true
+      title: The secret access token (OAuth2)
+      description: | 
+        You have to generate a secret access token in [the developer website](https://www.dropbox.com/developers).
+        Create an application and go in the setting's application.
       is_required: true
-      value_options: []
+   
+  - dropbox_local_path:
+    opts:
+      title: Local File
+      description: | 
+        The name of the local file you wish to upload on dropbox.
+        * Only one file !
+        * If a remote file exist with the same name, the file is overitten
+        
+        
+        **example :** "/tmp/myapp.ipa" or "/tmp/myapp.apk"
+      is_required: true
+
+  - dropbox_remote_path:
+    opts:
+      title: Dropbox remote target
+      description: | 
+        The directory to upload file in dropbox
+        * If you specify a directory that does not exist this one is created
+        **example :** "/delivery/ios" or "/delivery/android"
+      is_required: true
+
 
 outputs:
-  - EXAMPLE_STEP_OUTPUT:
+  - FILE_SHARED_LINK:
     opts:
-      title: "Example Step Output"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this output.
-
-        Can be Markdown formatted text.
+      title: "Shareable link for the uploaded file"
