@@ -2,7 +2,7 @@ format_version: 4
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 app:
-  envs
+  envs:
   # If you want to share this step into a StepLib
   - BITRISE_STEP_ID: dropbox-upload-v2
   - BITRISE_STEP_VERSION: "0.0.1"
