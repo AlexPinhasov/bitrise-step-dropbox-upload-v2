@@ -10,4 +10,4 @@ echo "INFO : Launching step script to upload file on dropbox..."
 
 val=$($THIS_SCRIPT_DIR/dropbox.js "${dropbox_secret}" "${dropbox_local_path}" "${dropbox_remote_path}")
 echo $val
-envman add --key EXAMPLE_STEP_OUTPUT --value val
+envman add --key DROPBOX_FILE_SHARED_LINK --value val

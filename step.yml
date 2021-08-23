@@ -49,15 +49,6 @@ is_always_run: false
 is_skippable: false
 run_if: ""
 
-deps:
-  brew:
-  - name: git
-  - name: wget
-  apt_get:
-  - name: git
-  - name: wget
-
-
 toolkit:
   bash:
     entry_file: step.sh
@@ -71,6 +62,7 @@ inputs:
         You have to generate a secret access token in [the developer website](https://www.dropbox.com/developers).
         Create an application and go in the setting's application.
       is_required: true
+      is_sensitive: true
    
   - dropbox_local_path:
     opts:
@@ -95,6 +87,6 @@ inputs:
 
 
 outputs:
-  - FILE_SHARED_LINK:
+  - DROPBOX_FILE_SHARED_LINK:
     opts:
       title: "Shareable link for the uploaded file"
