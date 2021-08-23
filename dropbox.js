@@ -30,6 +30,10 @@ const uploadStream = dropbox({
     }
 }, (err, result, response) => {
     if (err) { return console.log(err); }
+    createLink();
+});
+
+function createLink() {
     dropbox({
         resource: 'sharing/create_shared_link_with_settings',
         parameters: {
@@ -42,13 +46,41 @@ const uploadStream = dropbox({
             }
         }
     }, (err, result, response) => {
-        if (err) { return console.log(err); }
-        let url = result["url"];
-        url = url.replace("www.dropbox.com", "dl.dropboxusercontent.com");
-        url = url.replace("?dl=0", "");
-        return console.log(url);
+    if (err) {
+        if (err.error[".tag"] == 'shared_link_already_exists') {
+            linkExist();
+        } else {
+            return console.log(err); 
+        }
+    } else {
+        return console.log(parseURL(result));
+    }
     });
-});
+}
+
+function linkExist() {
+    dropbox({
+        resource: 'sharing/list_shared_links',
+        parameters: {
+            "path": dropbox_remote_path,
+        }
+    }, (err, result, response) => {
+    if (err) { return console.log(err); }
+        return console.log(parseURL(result));
+    });
+}
+
+function parseURL(result) {
+    var url;
+    if (result["url"]) {
+         url = result["url"];
+    } else if (result.links[0].url) {
+         url = result.links[0].url;
+    }
+    url = url.replace("www.dropbox.com", "dl.dropboxusercontent.com");
+    url = url.replace("?dl=0", "");
+    return url
+}
 
 //use nodejs stream
 fs.createReadStream(dropbox_local_path).pipe(uploadStream);
