@@ -5,7 +5,7 @@ app:
   envs:
   # If you want to share this step into a StepLib
   - BITRISE_STEP_ID: dropbox-upload-v2
-  - BITRISE_STEP_VERSION: "0.0.1"
+  - BITRISE_STEP_VERSION: "0.0.3"
   - BITRISE_STEP_GIT_CLONE_URL: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2.git
   - MY_STEPLIB_REPO_FORK_GIT_URL: https://github.com/AlexPinhasov/bitrise-steplib
 
